@@ -4,7 +4,7 @@ class Character:
     def __init__(self, name: str, description: str):
         self.__name = name
         self.__description = description
-        self.__id = Character.counter + 1
+        self.__id = Character.counter
         Character.counter += 1
 
     @property
@@ -34,7 +34,7 @@ class Event:
     def __init__(self, name: str, description: str):
         self.__name = name
         self.__description = description
-        self.__id = Event.counter + 1
+        self.__id = Event.counter
         Event.counter += 1
 
     @property

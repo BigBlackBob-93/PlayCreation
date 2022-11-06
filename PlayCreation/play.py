@@ -2,9 +2,9 @@ from play_elements import *
 
 
 class Play:
-    plot: list[int]
-    characters: list[Character]
-    events: list[Event]
+    plot = {}
+    characters: list[Character] = []
+    events: list[Event] = []
 
     def __init__(self, title: str):
         self.__title = title
@@ -24,6 +24,8 @@ class Play:
         print("\nEVENTS:", end=" ")
         for i in self.events:
             print(i.name, end=" ")
+        print("\nPLOT:", end=" ")
+        print(self.plot.items())
 
     def add_character(self, name: str, description: str = "No description"):
         smth = Character(name, description)
@@ -58,18 +60,12 @@ class Play:
         event = self.search_event(event_name)
 
         if character and event:
-            self.plot.insert(event.id, character.id)
+            self.plot.update({character.name: event.name})
         else:
             if not character:
-                character = bool(input("\nThis character was not created. Create?"))
-                if character:
-                    self.add_character(character_name)
-                else:
-                    quit()
+                self.add_character(character_name)
+                character = self.search_character(character_name)
             if not event:
-                event = bool(input("\nThis character was not created. Create?"))
-                if event:
-                    self.add_event(event_name)
-                else:
-                    quit()
-            self.plot.insert(self.events[-1].id, self.characters[-1].id)
+                self.add_event(event_name)
+                event = self.search_event(event_name)
+            self.plot.update({character.name: event.name})
