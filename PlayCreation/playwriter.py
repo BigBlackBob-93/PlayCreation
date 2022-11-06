@@ -1,4 +1,5 @@
 from play import *
+from critic import *
 
 
 class PlayWriter:
@@ -17,6 +18,14 @@ class PlayWriter:
     @nickname.setter
     def nickname(self, nickname: str):
         self.__nickname = nickname
+
+    @property
+    def mind(self):
+        return self.__mind
+
+    @mind.setter
+    def mind(self, mind: str):
+        self.__mind = mind
 
     def add_play(self, title: str):
         play = Play(title)
@@ -46,6 +55,8 @@ class PlayWriter:
         if play:
             play.show()
             print("--", self.nickname)
+            critic = Critic()
+            critic.criticize(self)
         else:
             print("You haven't written this yet")
 
@@ -55,3 +66,7 @@ class PlayWriter:
             self.__condition = 'dead'
 
 
+if __name__ == '__main__':
+    tom = PlayWriter("Tom")
+    tom.write("story", "Mila", "death")
+    tom.publish("story")
